@@ -18,8 +18,33 @@ def display_tasks():
     except json.decoder.JSONDecodeError:
         print('No current tasks.')
 
+def date_check(date):
+    elements = date.split(':')
+    if len(elements) == 3:
+        for i in elements:
+            if not (len(i) == 2 and i.isdigit()):
+                return False
+        return True
+    else:
+        return False
+    
 def new_task():
-    date = datetime.date.today().strftime("%y:%m:%d")
+    while True:
+        time.sleep(1)
+        print('Choose a date to add a new task.')
+        choice = input('1) Use today\'s date\n2) Write a date\n').strip()
+        if choice == '1':
+            date = datetime.date.today().strftime("%d:%m:%y")
+            break
+        elif choice == '2':
+            date = input('Please write a date(d:m:y): ').strip()
+            if date_check(date):
+                break
+            else:
+                print('Please enter a valid task number to delete.')
+                continue
+        else:
+            print('Please enter a valid task number to delete.')
 
     try:
         with open('data.json', 'r') as f:
