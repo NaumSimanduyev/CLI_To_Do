@@ -15,7 +15,7 @@ def display_tasks():
                 print('\t', end='')
                 print(*data[i], sep=f'\n\t')
 
-    except json.decoder.JSONDecodeError:
+    except:
         print('No current tasks.')
 
 def date_check(date):
